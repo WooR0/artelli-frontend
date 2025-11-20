@@ -1,0 +1,248 @@
+/* Gallery viewport - 전체 화면 중앙 정렬 */
+.gallery-viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.gallery-shell {
+  width: calc(100vh * 402 / 874);
+  height: 100vh;
+  max-width: 100vw;
+  background: #FCFCFC;
+  pointer-events: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* 상단 헤더 (120px) */
+.gallery-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(120 / 874 * 100vh);
+  background: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-header-content {
+  position: absolute;
+  top: calc(45 / 874 * 100vh);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(259 / 402 * 100%);
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 / 874 * 100vh);
+}
+
+.gallery-header-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(5 / 402 * 100%);
+}
+
+.gallery-main-title {
+  font-family: 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: calc(20 / 874 * 100vh);
+  line-height: 1.15;
+  color: #FCFCFC;
+  margin: 0;
+  padding: 0;
+}
+
+.gallery-main-title-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: calc(14 / 874 * 100vh);
+  line-height: 1.2;
+  color: #FCFCFC;
+  margin: 0;
+  padding: 0;
+}
+
+.gallery-location {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: calc(20 / 874 * 100vh);
+  line-height: 1.2;
+  color: #FCFCFC;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* 작품 썸네일 그리드 래퍼 (Frame 11: y: 185, Frame 12: x: 60, y: 8) */
+.gallery-artwork-grid-wrapper {
+  position: absolute;
+  top: calc(193 / 874 * 100vh); /* 185 + 8 */
+  left: calc(60 / 402 * 100%);
+  width: calc(282 / 402 * 100%);
+  height: calc(160 / 874 * 100vh);
+  background: #FCFCFC;
+  border: calc(1 / 874 * 100vh) solid #111111;
+  border-bottom: none;
+  border-radius: calc(20 / 874 * 100vh) calc(20 / 874 * 100vh) calc(10 / 874 * 100vh) calc(10 / 874 * 100vh);
+  box-sizing: border-box;
+}
+
+.gallery-artwork-grid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Figma 위치에 따른 개별 배치 - Frame 12 내부 기준 */
+.gallery-artwork-icon:nth-child(1) { position: absolute; left: calc(12 / 282 * 100%); top: calc(56 / 160 * 100%); }
+.gallery-artwork-icon:nth-child(2) { position: absolute; left: calc(70 / 282 * 100%); top: calc(12 / 160 * 100%); }
+.gallery-artwork-icon:nth-child(3) { position: absolute; left: calc(126 / 282 * 100%); top: calc(12 / 160 * 100%); }
+.gallery-artwork-icon:nth-child(4) { position: absolute; left: calc(182 / 282 * 100%); top: calc(12 / 160 * 100%); }
+.gallery-artwork-icon:nth-child(5) { position: absolute; left: calc(238 / 282 * 100%); top: calc(56 / 160 * 100%); }
+.gallery-artwork-icon:nth-child(6) { position: absolute; left: calc(238 / 282 * 100%); top: calc(112 / 160 * 100%); }
+
+.gallery-artwork-icon {
+  width: calc(32 / 874 * 100vh);
+  height: calc(32 / 874 * 100vh);
+  background: #111111;
+  border-radius: calc(12 / 874 * 100vh);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  aspect-ratio: 1 / 1;
+}
+
+.gallery-icon-number {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: calc(24 / 874 * 100vh);
+  line-height: 1em;
+  color: #FCFCFC;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-artwork-icon:hover {
+  transform: scale(1.05);
+}
+
+/* 주황색 마크 (아무것도 선택 안 했을 때) - 그리드 내부 기준 */
+.gallery-selected-marker {
+  position: absolute;
+  left: calc(16 / 282 * 100%);
+  top: calc(120 / 160 * 100%);
+  width: calc(24 / 874 * 100vh);
+  height: calc(24 / 874 * 100vh);
+  pointer-events: none;
+  aspect-ratio: 1 / 1;
+}
+
+/* 하단 작품 리스트 (y: 412, width: 346) */
+.gallery-artwork-list {
+  position: absolute;
+  top: calc(412 / 874 * 100vh);
+  left: calc(24 / 402 * 100%);
+  width: calc(346 / 402 * 100%);
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 / 874 * 100vh);
+}
+
+.gallery-artwork-item {
+  width: 100%;
+  height: calc(48 / 874 * 100vh);
+  background: #FCFCFC;
+  border: none;
+  border-bottom: calc(1 / 874 * 100vh) solid rgba(17, 17, 17, 0.1);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: calc(8 / 874 * 100vh) 0 calc(8 / 874 * 100vh) calc(20 / 402 * 100%);
+  display: flex;
+  align-items: center;
+  gap: calc(16 / 402 * 100%);
+  text-align: left;
+}
+
+.gallery-artwork-item:hover {
+  background: #f8f8f8;
+}
+
+.gallery-artwork-item.selected {
+  background: #f0f0f0;
+}
+
+.gallery-item-number {
+  width: calc(32 / 874 * 100vh);
+  height: calc(32 / 874 * 100vh);
+  background: #FCFCFC;
+  border: calc(1 / 874 * 100vh) solid #BBBBBB;
+  border-radius: calc(12 / 874 * 100vh);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: calc(24 / 874 * 100vh);
+  line-height: 1em;
+  color: #111111;
+  transition: all 0.3s ease;
+  aspect-ratio: 1 / 1;
+}
+
+.gallery-item-text {
+  display: flex;
+  align-items: center;
+  gap: calc(8 / 402 * 100%);
+  flex: 1;
+}
+
+.gallery-item-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: calc(16 / 874 * 100vh);
+  line-height: 1.2;
+  text-align: left;
+  transition: color 0.3s ease;
+}
+
+.gallery-item-dot {
+  width: calc(2 / 874 * 100vh);
+  height: calc(2 / 874 * 100vh);
+  background: #111111;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+  display: block;
+}
+
+
+.gallery-item-artist {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: calc(12 / 874 * 100vh);
+  line-height: 1.2;
+  text-align: left;
+  transition: color 0.3s ease;
+}

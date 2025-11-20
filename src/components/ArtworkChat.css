@@ -1,0 +1,284 @@
+/* Figma 디자인 기반 작품 상세 화면 */
+.artwork-detail-viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.artwork-detail-shell {
+  width: calc(100vh * 402 / 874); /* 402:874 비율 유지 */
+  height: 100vh;
+  max-width: 100vw;
+  background: #FCFCFC;
+  pointer-events: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.artwork-detail-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Header - 작품 이미지 (다른 화면들과 통일) */
+.artwork-hero-image {
+  position: relative;
+  width: 100%;
+  height: calc(120 / 874 * 100vh);
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* 뒤로가기 버튼 위치 조정 - IntroSequence와 동일 */
+.artwork-detail-shell .back-button {
+  top: calc(52 / 874 * 100vh); /* IntroSequence와 동일 */
+  z-index: 100; /* 이미지 위에 표시 */
+}
+
+.artwork-hero-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(312 / 874 * 100vh);
+  object-fit: cover;
+  display: block;
+}
+
+.artwork-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+/* Top area - 작품 정보 + 아이콘 */
+.artwork-top-area {
+  position: absolute;
+  top: calc(120 / 874 * 100vh);
+  left: 0;
+  width: 100%;
+  height: calc(120 / 874 * 100vh);
+  background: linear-gradient(180deg, rgba(252, 252, 252, 1) 90%, rgba(252, 252, 252, 0) 100%);
+  z-index: 10;
+}
+
+.artwork-info-header {
+  position: absolute;
+  top: calc(24 / 874 * 100vh);
+  left: calc(21 / 402 * 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(8 / 874 * 100vh);
+}
+
+.artwork-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: calc(20 / 874 * 100vh);
+  line-height: 1.2;
+  color: #111111;
+  margin: 0;
+  padding: 0;
+}
+
+.artwork-meta {
+  display: flex;
+  align-items: center;
+  gap: calc(6 / 402 * 100%);
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.artwork-artist {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: calc(16 / 874 * 100vh);
+  line-height: 1.2;
+  color: #111111;
+  margin: 0;
+  padding: 0;
+}
+
+.artwork-dot {
+  width: calc(2 / 874 * 100vh);
+  height: calc(2 / 874 * 100vh);
+  background: #111111;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.artwork-year {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: calc(13 / 874 * 100vh);
+  line-height: 1.2;
+  color: #111111;
+  margin: 0;
+  padding: 0;
+}
+
+.artwork-medium {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: calc(12 / 874 * 100vh);
+  line-height: 1.2;
+  color: #111111;
+  margin: 0;
+  padding: 0;
+}
+
+/* Action 아이콘 (top: 24px, right: 21px) */
+.artwork-actions {
+  position: absolute;
+  top: calc(24 / 874 * 100vh);
+  right: calc(21 / 402 * 100%);
+  display: flex;
+  gap: calc(8 / 402 * 100%);
+}
+
+/* 하트 버튼 */
+.heart-button {
+  width: calc(36 / 874 * 100vh);
+  height: calc(36 / 874 * 100vh);
+  border: calc(1 / 874 * 100vh) solid #DDDDDD;
+  border-radius: calc(18 / 874 * 100vh);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(6 / 874 * 100vh);
+}
+
+.heart-button.liked {
+  border-color: #FF6B6B;
+}
+
+/* Scroll area - 본문 */
+.artwork-content-scroll {
+  position: absolute;
+  top: calc((120 / 874 * 100vh) + calc(120 / 874 * 100vh)); /* 헤더 + top-area */
+  bottom: calc(90 / 874 * 100vh); /* 하단 박스 높이만큼 여백 */
+  left: calc(21 / 402 * 100%);
+  width: calc(360 / 402 * 100%); /* 반응형 너비 */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.artwork-content-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+.artwork-content {
+  display: flex;
+  flex-direction: column;
+  gap: calc(32 / 874 * 100vh);
+  padding-top: calc(28 / 874 * 100vh);
+  padding-bottom: calc(40 / 874 * 100vh);
+}
+
+.content-section {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 / 874 * 100vh);
+}
+
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 600;
+  font-size: calc(18 / 874 * 100vh);
+  line-height: calc(24 / 874 * 100vh);
+  color: #111111;
+  margin: 0;
+}
+
+.section-text {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: calc(14 / 874 * 100vh);
+  line-height: calc(32 / 874 * 100vh);
+  color: #111111;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* Bottom area - CTA 버튼 */
+.artwork-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(90 / 874 * 100vh);
+  background: linear-gradient(180deg, rgba(252, 252, 252, 0) 0%, rgba(252, 252, 252, 1) 10%);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* 회색 스퀘어 제거됨 */
+
+.chat-cta-button {
+  position: absolute;
+  top: calc(21 / 874 * 100vh);
+  left: calc(21 / 402 * 100%);
+  width: calc(360 / 402 * 100%); /* 반응형 너비 */
+  height: calc(48 / 874 * 100vh);
+  background: #89AB9C;
+  border: none;
+  border-radius: calc(16 / 874 * 100vh);
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: calc(18 / 874 * 100vh);
+  line-height: calc(27 / 874 * 100vh);
+  color: #FCFCFC;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-cta-button:hover {
+  background: #7a9a8a;
+  transform: translateY(calc(-1 / 874 * 100vh));
+}
+
+.chat-cta-button:active {
+  transform: translateY(0);
+}
+
+/* 모바일 대응 */
+@media (max-width: 402px) {
+  .artwork-detail-shell {
+    width: 100vw;
+  }
+
+  .artwork-content-scroll {
+    width: calc(100vw - calc(42 / 402 * 100vw));
+  }
+
+
+  .chat-cta-button {
+    width: calc(100vw - calc(42 / 402 * 100vw));
+  }
+}
